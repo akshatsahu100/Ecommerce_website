@@ -1,0 +1,46 @@
+.adminpanel {
+     height: 50px;
+     display: flex;
+     align-items: center;
+     background-color: #c7d2e0;
+     position: sticky;
+     top: 0;
+     /* z-index: 100; */
+     /* justify-content: space-evenly; */
+   }
+
+.adminpanel_logo {
+     float: left;
+     width: 110px;
+     width: 80%;
+     object-fit: contain;
+     margin: 0 20px;
+     /* margin-top: 18px; */
+     font-size: 16px;
+     font-weight: 800;
+}
+
+.header_optionLineTwo {
+     font-size: 18px;
+     font-weight: 800;
+}
+
+
+
+.adminpanel_nav {
+     width: 70%;
+     float: right;
+     display: flex;
+     justify-content: flex-end;
+     margin-right: 20px;
+     color: black;
+}
+
+.adminpanel_option {
+     display: flex;
+     flex-direction: column;
+     margin-left: 12px;
+     margin-right: 12px;
+     color: black;
+     /* color: white; */
+}

@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const path = require('path')
 const session = require('express-session');
 const products = require('./productsList');
+const users = require('./userList');
 require("./authentication/passport_local");
 const bodyParser = require('body-parser');
 
@@ -35,7 +36,9 @@ app.use('/user', require('./routes/user_routes').route);
 app.get('/products', (req,res) => {
     res.send(products);
 })
-
+app.get('/users', (req,res) => {
+    res.send(users);
+})
 
 
 

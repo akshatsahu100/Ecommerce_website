@@ -1,29 +1,61 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import userList from "../userList";
+import { Link } from "react-router-dom";
+import Alerts from "./Alerts";
+import axios from 'axios';
 
-function Register() {
-     const [name, setName] = useState('');
-     const [email, setEmail] = useState('');
-     const [password, setPassword] = useState('');
-     const [confirmpassword, setConfirmPassword] = useState('');
-     const [list, setlist] = useState(userList);
+function Addproduct() {
+     const [title, setTitle] = useState('');
+     const [brand, setBrand] = useState('');
+     const [price, setPrice] = useState(0);
+     const [category, setCategory] = useState('');
+     const [rating, setrating] = useState(0);
+     const [numReview, setNumReview] = useState(0);
+     const [description, setDescription] = useState("");
+     const [image, setImage] = useState("");
+     const [countInStock, setCountinStock] = useState(0);
+     const [alert, setAlert] = useState("");
+     const [alertmessage, setAlertmessage] = useState("");
      const newproduct = {
-        name: name,
-        email: email,
-        password: password,
-        isAdmin: false
+        title: title,
+        brand: brand,
+        price: price,
+        category: category,
+        rating: rating,
+        countInStock: countInStock,
+        description: description,
+        numReview: numReview,
+        image: image  
+     }
+     function setToDefault(){
+         setTitle('');
+         setBrand('');
+         setCategory('');
+         setPrice(0);
+         setrating(0);
+         setNumReview(0);
+         setCountinStock(0);
+         setDescription("");
+         setImage("");
      }
      const submitHandler = (e) => {
         e.preventDefault();
-        setlist((list) => {
-            return [...list, newuser];
-        });
-        setlist();
-        console.log(newuser);
         
+            axios.post('http://localhost:5000/product/', newproduct)
+            .then(res => {
+                setAlert("success");
+                setAlertmessage("Product Added");
+                setToDefault();
+            })
+            .catch( err => {
+                setAlert("failure");
+                setAlertmessage(err);
+            });
+            
+        
+        
+        setInterval(() => {
+            setAlert('');
+        }, 3000);
      }
      
      return (
@@ -33,48 +65,42 @@ function Register() {
                 <img
                     className="login__logo"
                     src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png' 
+                    alt="Amazon"
                 />
             </Link>
-
-            <div className='login__container'>
-                <h1>Register</h1>
+            <Alerts messagetype = {alert} message ={alertmessage}/>
+            <div className='login__container width-60'>
+                <h1>Add New Product</h1>
 
                 <form>
-                    <h5>Name</h5>
-                    <input type='text' value={name} onChange={e => setName(e.target.value)} />
+                    <h5>title</h5>
+                    <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
 
-                    <h5>E-mail</h5>
-                    <input type='text' value={email} onChange={e => setEmail(e.target.value)} />
+                    <h5>Brand</h5>
+                    <input type='text' value={brand} onChange={e => setBrand(e.target.value)} />
 
-                    <h5>Password</h5>
-                    <input type='password' value={password} onChange={e => setPassword(e.target.value)} />
+                    <h5>Price</h5>
+                    <input type='number' value={price} onChange={e => setPrice(e.target.value)} />
                     
-                    <h5>Confirm Password</h5>
-                    <input type='password' value={confirmpassword} onChange={e => setConfirmPassword(e.target.value)} />
+                    <h5>Category</h5>
+                    <input type='text' value={category} onChange={e => setCategory(e.target.value)} />
 
-                    <FormControlLabel
-                        control={
-                        <Checkbox
-                            name="checkedB"
-                            color="primary"
-                        />
-                        }
-                        label="Admin Account"
-                    />
+                    <h5>countInStock</h5>
+                    <input type='number' value={countInStock} onChange={e => setCountinStock(e.target.value)} />
+
+                    <h5>Description</h5>
+                    <input type='text' value={description} onChange={e => setDescription(e.target.value)} />
                     
+                    <h5>Image URL</h5>
+                    <input type='text' value={image} onChange={e => setImage(e.target.value)} />
 
-                    <button type='submit' className='login__signInButton' onClick={submitHandler}>Register</button>
+                    <button type='submit' className='login__signInButton' onClick={submitHandler}>Add Product</button>
                 </form>
 
-                <p>
-                    Already a member? Sign in to your Amazon Account
-                </p>
-                <Link to="/login">
-                    <button className='login__registerButton'>Sign In</button>
-                </Link>
+                
             </div>
         </div>
      )
 }
 
-export default Register
+export default Addproduct

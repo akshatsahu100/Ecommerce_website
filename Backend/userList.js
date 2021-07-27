@@ -6,12 +6,13 @@ const users = [
           password: "Akshat Sahu",
           isAdmin: true
      },
-     {
-          id: 1,
+     { 
+          id: 2,
           name: "Anurag Kumar",
           email: "anurag@anurag.com",
           password: "Anurag Kumar",
           isAdmin: false
      },
 ]
-export default users;
+
+module.exports = {users};

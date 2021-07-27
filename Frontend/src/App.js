@@ -8,6 +8,9 @@ import Register from './components/Register.js';
 import Login from './components/Login.js'; 
 import ProductDetails from './components/ProductDetails.js'; 
 import AdminPanel from './components/AdminPanel.js'; 
+import ManageUsers from './components/ManageUsers';
+import ManageProducts from './components/ManageProducts';
+import AddProduct from './components/AddProduct';
 
 
 function App() {
@@ -45,6 +48,25 @@ function App() {
         <Route path="/product/:id" component={ProductDetails}>
         </Route>
       </Switch>
+
+      <Switch>
+        <Route exact path="/manageusers">
+          <ManageUsers />
+        </Route>
+      </Switch>
+
+      <Switch>
+        <Route exact path="/manageproducts">
+          <ManageProducts />
+        </Route>
+      </Switch>
+
+      <Switch>
+        <Route exact path="/addproduct">
+          <AddProduct />
+        </Route>
+      </Switch>
+
       <Footer />
 
     </Router>
